@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:todo_app/application/text.dart';
 import 'package:todo_app/models/student_model.dart';
 import 'package:todo_app/models/validation_register.dart';
 import 'package:intl/intl.dart';
-import 'package:todo_app/moor_database/moor_database.dart';
 
 class RegisterForm extends StatefulWidget {
   const RegisterForm({Key? key}) : super(key: key);
@@ -59,11 +57,7 @@ class _RegisterFormState extends State<RegisterForm> {
           password: pass.text,
           date: date.text,
           grade: tgrade.text);
-      ValidationRegister().insertData(stud, context);
-      final result = await Provider.of<AppDao>(context, listen: false)
-          .getAllStudent()
-          .then((value) => value);
-      print(result.first);
+      ValidationRegister().insertData(stud);
       form.reset();
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(

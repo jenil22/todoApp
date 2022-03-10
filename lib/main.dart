@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_app/models/home_argurments.dart';
 import 'package:todo_app/models/task_model.dart';
-import 'package:todo_app/moor_database/moor_database.dart';
 import 'package:todo_app/screens/login_page.dart';
 import 'package:todo_app/screens/register_page.dart';
 import 'package:todo_app/screens/splash_page.dart';
@@ -12,7 +11,6 @@ void main() {
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => TaskModel()),
-      Provider(create: (_) => AppDatabase().appDao),
     ],
     child: const MyApp(),
   ));
@@ -46,7 +44,7 @@ class MyApp extends StatelessWidget {
             shadowColor: Colors.transparent,
             iconTheme: IconThemeData(color: Colors.white60)),
       ),
-      home: const RegisterPage(),
+      home: const SplashPage(),
       routes: {
         '/login': (context) => const LoginPage(),
         '/register': (context) => const RegisterPage(),

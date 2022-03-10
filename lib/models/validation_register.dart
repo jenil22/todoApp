@@ -1,9 +1,6 @@
 //validation for register form
-import 'package:flutter/cupertino.dart';
-import 'package:drift/drift.dart';
-import 'package:provider/provider.dart';
+import 'package:todo_app/database/database_register.dart';
 import 'package:todo_app/models/student_model.dart';
-import 'package:todo_app/moor_database/moor_database.dart';
 
 class ValidationRegister {
   //validation for first name
@@ -69,17 +66,8 @@ class ValidationRegister {
   }
 
   //insert data
-  Future<void> insertData(Student stud, BuildContext context) async {
-    var student = StudentRegisterCompanion(
-      firstname: Value(stud.firstname),
-      lastname: Value(stud.lastname),
-      username: Value(stud.username),
-      email: Value(stud.email),
-      password: Value(stud.password),
-      birthdate: Value(stud.date),
-      grade: Value(stud.grade),
-      status: const Value(false),
-    );
-    await Provider.of<AppDao>(context, listen: false).insertStudent(student);
+  Future<void> insertData(Student stud) async {
+    final result = await StudentDataBase.instance.create(stud);
+    print(result);
   }
 }
